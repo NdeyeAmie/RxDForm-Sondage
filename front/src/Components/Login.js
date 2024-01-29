@@ -1,25 +1,37 @@
-import axios from 'axios';
+/* eslint-disable no-unused-vars */
+// import axios from 'axios';
 import React,{ useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { login } from '../redux/actions/userAction';
+import Loading from './Loading';
+import Message from './Message';
 // import axios from "../api/axios";
 
  function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const userLogin =  useSelector((state) => state.userLogin);
+  const { error, loading, userInfo } = userLogin;
 
 
   const handleLogin = async(event) => {
     event.preventDefault();
     console.log(email,password);
-    try {
-      await axios.post('http://localhost:8000/api/users/login',{email,password})
-      setEmail("");
-      setPassword("")
-      navigate("/")
-    } catch (e) {
-      console.log(e);
-    }
+    await dispatch(login(email, password));
+    navigate("/");
+
+    // try {
+    //   await axios.post('http://localhost:8000/api/users/login',{email,password})
+    //   setEmail("");
+    //   setPassword("")
+    //   navigate("/")
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
   return (
     <>
@@ -36,6 +48,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
           <div className='h1'>
            <h1>Login</h1>
            </div>
+           {error && <Message variant="danger">{error}</Message>}
+          {loading && <Loading />}
+          {Loading}
             <form onSubmit={handleLogin}>
            <div className='fisrt-input'>
              <img src="assets/email.jpg" alt="email" className="email"/>

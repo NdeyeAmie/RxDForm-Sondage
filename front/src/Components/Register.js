@@ -1,31 +1,43 @@
+/* eslint-disable no-unused-vars */
 import React,{ useState } from 'react';
 import { NavLink, useNavigate} from 'react-router-dom';
-// import axios from "../api/axios";
-import axios from 'axios';
+import Loading from './Loading';
+import Message from './Message';
+import { register } from '../redux/actions/userAction';
+import { useSelector , useDispatch } from 'react-redux';
 
  function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
-  const csrf = () => axios.get("/sanctun/csrf-cookie")
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { error, loading, userInfo } = userRegister;
+
 
   const handleRegister = async(event) => {
     event.preventDefault();
-    await csrf()
-    // console.log(name,email,password);
-    try {
-      await axios.post('http://localhost:8000/api/users/register',{name,email,password,confirmPassword})
-      setName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("")
-      navigate("/")
-    } catch (e) {
-      console.log(e);
+    if (password !== confirmPassword) {
+      setMessage("le mot de passe ne correspond pas");
+    } else {
+      dispatch(register(name, email, password));
+      navigate("/");
     }
+    // console.log(name,email,password);
+    // try {
+    //   await axios.post('http://localhost:8000/api/users/register',{name,email,password,confirmPassword})
+    //   setName("");
+    //   setEmail("");
+    //   setPassword("");
+    //   setConfirmPassword("")
+    //   navigate("/")
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
   return (
     <>
@@ -46,6 +58,9 @@ import axios from 'axios';
           <div className='h1'>
            <h1>Sign Up</h1>
            </div>
+           {error && <Message variant="danger">{error}</Message>}
+          {loading && <Loading />}
+          {message && <Message variant="danger">{message}</Message>}
            <form onSubmit={handleRegister}>
            <div className='fisrt-input'>
              <img src="assets/email.jpg" alt="name" className="email"/>
