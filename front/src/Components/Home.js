@@ -13,16 +13,23 @@ function Home() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src="assets/1.jpg" className="d-block w-100" alt="ABAYA" height="500px"/>
+           
+            <img src="assets/survey.png" className="d-block w-50" alt="ABAYA" height="500px" />
+            "La Coupe d'Afrique de football est l'un des événements sportifs les plus attendus sur le continent. 
+            À l'approche du tournoi, nous aimerions connaître vos attentes, prédictions et opinions concernant cette compétition passionnante. 
+            Participez à notre sondage pour partager votre passion pour le football africain et exprimer vos sentiments avant le coup d'envoi de la Coupe d'Afrique.
+             Vos réponses contribueront à former un tableau diversifié des attentes des amateurs de football en Afrique et dans le monde entier. 
+             Que vous souteniez une équipe spécifique ou que vous anticipiez des moments mémorables, nous sommes impatients de découvrir ce que vous pensez de la prochaine Coupe d'Afrique de football."
+            
           </div>
           <div className="carousel-item">
-            <img src="assets/1.jpg" className="d-block w-100" alt="ABAYA" height="500px"/>
+            <img src="assets/survey.png" className="d-block w-50" alt="ABAYA" height="500px"/>
           </div>
           <div className="carousel-item">
-            <img src="assets/1.jpg" className="d-block w-100" alt="ABAYA" height="500px"/>
+            <img src="assets/survey1.png" className="d-block w-50" alt="ABAYA" height="500px"/>
           </div>
           <div className="carousel-item">
-            <img src="assets/1.jpg" className="d-block w-100" alt="ABAYA" height="500px"/>
+            <img src="assets/survey.png" className="d-block w-100" alt="ABAYA" height="500px"/>
           </div>
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
